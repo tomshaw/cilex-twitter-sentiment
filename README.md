@@ -39,7 +39,7 @@ Cilex Twitter Sentiment is a rudimentary Twitter stream sentiment analysis comma
 
      - `Cilex/Service`: included is modified version of Phirehose, a class that makes it easy to consume the Twitter Streaming API. Twitter Sentiment class that parses data from tweets.
 
-`dict/` contains [AFINN: Word list for sentiment analysis](http://fnielsen.posterous.com/afinn-a-new-word-list-for-sentiment-analysis) dictionaries for sentiment analysis.
+`dict/` contains [AFINN: Word list for sentiment analysis](https://finnaarupnielsen.wordpress.com/2011/03/16/afinn-a-new-word-list-for-sentiment-analysis/) dictionaries for sentiment analysis.
 
 ## Awesome Libraries Used
 -------------------------
@@ -52,20 +52,20 @@ Cilex Twitter Sentiment is a rudimentary Twitter stream sentiment analysis comma
 ## Related
 ----------
 
-[AFINN: Word list for sentiment analysis](http://fnielsen.posterous.com/afinn-a-new-word-list-for-sentiment-analysis)
+[AFINN: Word list for sentiment analysis](https://finnaarupnielsen.wordpress.com/2011/03/16/afinn-a-new-word-list-for-sentiment-analysis/https://finnaarupnielsen.wordpress.com/2011/03/16/afinn-a-new-word-list-for-sentiment-analysis/)
 
 [Twitter Mood](http://www.ccs.neu.edu/home/amislove/twittermood/)
 
 [ANEW Sentiment-Weighted Word Bank](http://csea.phhp.ufl.edu/media/anewmessage.html)
 
-[Measuring User Influence in Twitter](http://an.kaist.ac.kr/~mycha/docs/icwsm2010_cha.pdf)
+[Measuring User Influence in Twitter](https://www.researchgate.net/publication/221298004_Measuring_User_Influence_in_Twitter_The_Million_Follower_Fallacy)
 
 ## Further Reading
 ------------------
 
 [Sentiment strength detection in short informal text](http://onlinelibrary.wiley.com/doi/10.1002/asi.21416/abstract)
 
-[Twitter as a Corpus for Sentiment Analysis and Opinion Mining](http://deepthoughtinc.com/wp-content/uploads/2011/01/Twitter-as-a-Corpus-for-Sentiment-Analysis-and-Opinion-Mining.pdf)
+[Twitter as a Corpus for Sentiment Analysis and Opinion Mining](http://www.lrec-conf.org/proceedings/lrec2010/pdf/385_Paper.pdf)
 
 [We Feel Fine](http://wefeelfine.org/faq.html)
 
