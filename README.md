@@ -37,7 +37,7 @@ Cilex Twitter Sentiment is a rudimentary Twitter stream sentiment analysis comma
 
      - `Cilex/Provider`: included Cilex runtime helper objects.
 
-     - `Cilex/Service`: modified version of Phirehose, a class that makes it easy to consume the Twitter Streaming API.
+     - `Cilex/Service`: included is modified version of Phirehose, a class that makes it easy to consume the Twitter Streaming API. Twitter Sentiment class that parses data from tweets.
 
 `dict/` contains [AFINN: Word list for sentiment analysis](http://fnielsen.posterous.com/afinn-a-new-word-list-for-sentiment-analysis) dictionaries for sentiment analysis.
 
