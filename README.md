@@ -52,6 +52,8 @@ Cilex Twitter Sentiment is a rudimentary Twitter stream sentiment analysis comma
 ## Related
 ----------
 
+[Symfony Console Beyond the Basics – Helpers and Other Tools](https://www.sitepoint.com/symfony-console-beyond-the-basics-helpers-and-other-tools)
+
 [AFINN: Word list for sentiment analysis](https://finnaarupnielsen.wordpress.com/2011/03/16/afinn-a-new-word-list-for-sentiment-analysis/https://finnaarupnielsen.wordpress.com/2011/03/16/afinn-a-new-word-list-for-sentiment-analysis/)
 
 [Twitter Mood](http://www.ccs.neu.edu/home/amislove/twittermood/)
