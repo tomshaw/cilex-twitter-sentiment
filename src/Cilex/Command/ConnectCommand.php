@@ -6,13 +6,11 @@ namespace Cilex\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-//use Symfony\Component\Console\Input\InputOption;
+// use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableCell;
-
 use Cilex\Provider\Console\Command;
 use Cilex\Service\Twitter;
 use Cilex\Service\Sentiment;
@@ -38,57 +36,74 @@ class ConnectCommand extends Command
         $container = $this->getContainer();
         
         $c = new Color();
-
+        
         $argument = $input->getArgument('words');
-
+        
         $words = ($argument) ? explode('-', $argument) : [];
         
-        //$this->initProgressBar();
+        $this->initProgressBar();
         
         $config = $container['application.config'];
-
+        
         if (sizeof($words)) {
             $config['track'] = $words;
         }
         
-        $this->out($c('Name: ' . $app->getName())->blue()->bold()->highlight('white') . PHP_EOL . PHP_EOL);
-        $this->out($c('Version: ' . $app->getVersion())->blue()->bold()->highlight('white') . PHP_EOL . PHP_EOL);
-
+        $output->writeln($c('Name: ' . $app->getName())->blue()
+            ->bold()
+            ->highlight('white') . PHP_EOL . PHP_EOL);
+        
+        $output->writeln($c('Version: ' . $app->getVersion())->blue()
+            ->bold()
+            ->highlight('white') . PHP_EOL . PHP_EOL);
+        
         $sentiment = new Sentiment();
         
         EventManager::getInstance()->attach('TweetStream', function ($e) use ($output, $sentiment, $c) {
             $data = $e->getParams();
-
-            $name = '@' . $data['user']['screen_name'];
+            //print_r($data);
+            
+            $user = $data['user']['screen_name'];
+            $name = $data['user']['name'];
             $tweet = urldecode(substr($data['text'], 0, 120));
+            $created = $data['created_at'];
             
             $result = $sentiment->analyze(urldecode($data['text']));
             
             $score = $result['score'];
-
+            
             $grade = implode(', ', array_values($result['match']));
             $words = implode(', ', array_keys($result['match']));
-            
-            if (!$grade || !$words) {
-                return;
-            }
 
+            if ($score<0) {
+                $sentiment = $c('Negative')->red()->bold();
+            } else if ($score === 0) {
+                $sentiment = $c('Neutral')->yellow()->bold();
+            } else {
+                $sentiment = $c('Positive')->blue()->bold();
+            }
+            
             $table = new Table($output);
             
             $table->setHeaders(array(
-                array(new TableCell(urldecode($c($name)->green()->bold()), array('colspan' => 3))),
-                //array('Property', 'Value'),
+                [
+                    new TableCell($user, array('colspan' => 1)),
+                    new TableCell($name, array('colspan' => 1)),
+                    new TableCell($created, array('colspan' => 1))
+                ]
+                // ['Property', 'Value'],
             ));
             
             $table->setRows(array(
                 [
                     'Score:',
-                    $result['score']
+                    $sentiment
                 ],
                 new TableSeparator(),
                 [
-                    'Grade:',
-                    $grade
+                    'Marks:',
+                    $grade,
+                    $result['score']
                 ],
                 new TableSeparator(),
                 [
@@ -96,17 +111,19 @@ class ConnectCommand extends Command
                     $words
                 ],
                 new TableSeparator(),
-                array(new TableCell(urldecode($c($tweet)->white()->bold()), array('colspan' => 3))),
+                array(
+                    new TableCell(urldecode($tweet), array('colspan' => 3))
+                )
             ));
             
-            $table->setStyle('compact');
+            //$table->setStyle('compact');
             
-            $table->setStyle('borderless');
-
+            //$table->setStyle('borderless');
+            
             $table->render();
             
             $output->writeln(PHP_EOL . PHP_EOL);
-
+            
         });
         
         $this->initStream($config);
@@ -121,7 +138,7 @@ class ConnectCommand extends Command
         // $stream->setFormat(Twitter::FORMAT_JSON);
         $stream->setTrack($config['track']);
         // $stream->setLang('en');
-
+        
         $stream->consume();
     }
 
